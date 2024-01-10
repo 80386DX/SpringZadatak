@@ -17,37 +17,9 @@ public class StatistikaController {
     @Autowired
     StatistikaService service;
 
-    @GetMapping
-    public List<Statistika> getAllStatistika() {
-        return service.getAllStatistika();
-    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Statistika> getStatistikaById(@PathVariable Long id) {
-        Statistika statistika = service.getStatistikaById(id);
-        return ResponseEntity.ok(statistika);
+    @PostMapping("/brojac")
+    public void countAndSaveForms() {
+        service.countAndSaveForms();
     }
-
-    @PostMapping
-    public ResponseEntity<Statistika> createPoljePopunjeno(@RequestBody Statistika statistika) {
-        Statistika noviStatistika = service.saveStatistika(statistika);
-        return new ResponseEntity<>(noviStatistika, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Statistika> updateStatistika(@PathVariable Long id, @RequestBody Statistika statistika) {
-        if (service.getStatistikaById(id) != null) {
-            statistika.setId(id);
-            Statistika updatedStatistika = service.saveStatistika(statistika);
-            return new ResponseEntity<>(updatedStatistika, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStatistika(@PathVariable Long id) {
-        service.getStatistikaById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
 }
