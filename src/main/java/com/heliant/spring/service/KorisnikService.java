@@ -5,6 +5,7 @@ import com.heliant.spring.jwt.JwtTokenProvider;
 import com.heliant.spring.model.Korisnik;
 import com.heliant.spring.model.Rola;
 import com.heliant.spring.repository.KorisnikRepo;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
