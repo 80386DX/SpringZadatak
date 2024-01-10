@@ -16,7 +16,7 @@ public class PoljePopunjeno {
     @Column(name = "id_formular_popunjen")
     private int idFormularPopunjen;
 
-    @Column(name = "id_polje")
+    @Column(name = "id_polje", nullable = false)
     private int idPolje;
 
     @Column(name = "vrednost_tekst")
@@ -25,7 +25,7 @@ public class PoljePopunjeno {
     @Column(name = "vrednost_broj")
     private double vrednostBroj;
 
-    @Column(name = "vreme_kreiranja")
+    @Column(name = "vreme_kreiranja", nullable = false)
     private Timestamp vremeKreiranja;
 
     @Column(name = "vreme_poslednje_izmene")

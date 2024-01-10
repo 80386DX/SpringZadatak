@@ -12,7 +12,7 @@ public class Polje {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "id_formular")
+    @Column(name = "id_formular", nullable = false)
     private int idFormular;
 
     private String naziv;

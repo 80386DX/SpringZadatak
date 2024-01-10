@@ -1,5 +1,6 @@
 package com.heliant.spring.rest;
 
+import com.heliant.spring.dto.KorisnikRequestDTO;
 import com.heliant.spring.model.Korisnik;
 import com.heliant.spring.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class KorisnikController {
     @Autowired
     private KorisnikService service;
 
-    @GetMapping
+    @GetMapping()
     public List<Korisnik> getAllKorisnik() {
         return service.getAllKorisnik();
     }
@@ -26,23 +27,28 @@ public class KorisnikController {
         return ResponseEntity.ok(korisnik);
     }
 
-    @PostMapping
-    public ResponseEntity<Korisnik> createKorisnik(@RequestBody Korisnik korisnik) {
-        Korisnik noviKorisnik = service.saveKorisnik(korisnik);
+    @PostMapping("/create-user")
+    public ResponseEntity<Korisnik> createKorisnik(@RequestBody KorisnikRequestDTO requestDTO) {
+        Korisnik noviKorisnik = service.saveKorisnik(requestDTO);
         return new ResponseEntity<>(noviKorisnik, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Korisnik> updateKorisnik(@PathVariable Long id, @RequestBody Korisnik korisnik) {
+    @PostMapping("/create-admir")
+    public ResponseEntity<Korisnik> createAdmir(@RequestBody KorisnikRequestDTO requestDTO) {
+        Korisnik noviKorisnik = service.saveAdmir(requestDTO);
+        return new ResponseEntity<>(noviKorisnik, HttpStatus.CREATED);
+    }
+
+    @PutMapping("update-korisnik/{id}")
+    public ResponseEntity<Korisnik> updateKorisnik(@PathVariable Long id, @RequestBody KorisnikRequestDTO requestDTO) {
         if (service.getKorisnikById(id) != null) {
-            korisnik.setId(id);
-            Korisnik updatedKorisnik = service.saveKorisnik(korisnik);
+            Korisnik updatedKorisnik = service.saveKorisnik(requestDTO);
             return new ResponseEntity<>(updatedKorisnik, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete-user/{id}")
     public ResponseEntity<Void> deleteKorisnik(@PathVariable Long id) {
         service.deleteKorisnik(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

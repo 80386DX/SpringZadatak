@@ -15,7 +15,7 @@ public class Formular {
 
     private String naziv;
 
-    @Column(name = "vreme_kreiranja")
+    @Column(name = "vreme_kreiranja", nullable = false)
     private Timestamp vremeKreiranja;
 
     @Column(name = "vreme_poslednje_izmene")
